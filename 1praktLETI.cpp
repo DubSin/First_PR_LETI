@@ -7,10 +7,13 @@ using namespace std;
 HANDLE hConsoleOutput = ::GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_SCREEN_BUFFER_INFO csb;
 
+// перегрузка функции по инвертации всех битов заданого числа
 int idz(int);
 float idz(float);
 double idz(double);
 
+
+// функция представления целого числа в памяти
 void findint(int num){
 	unsigned int order = 32; 
 	unsigned int mask = 1 << order - 1; 
@@ -30,6 +33,7 @@ void findint(int num){
 	}
 }
 
+// функция представления вещественного(float) числа в памяти
 void findfloat(float num) {
     union{
         float num1;
@@ -53,6 +57,8 @@ void findfloat(float num) {
         }
 	}
 }
+
+// функция представления вещественного(double) числа в памяти
 void finddouble(double num)
 {
     union 
@@ -97,6 +103,7 @@ int main() {
     cout << "First task: " << sizeof(int) << " " << sizeof(short int) << " " << sizeof(long int) << " " << sizeof(float) << " " << sizeof(double) << " " << sizeof(long double) << " " << sizeof(char) << " " << sizeof(bool) << endl;
     cout << "Second task(input int data, to quit type 0): ";
     cin >> num2;
+    // проверка на правильность ввода
     while(num2 != 0 || cin.fail()){
         if (cin.fail())
         {
@@ -116,6 +123,7 @@ int main() {
             char dotask; 
             cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
             cin >> dotask;
+            // буферная переменная для многократного инвертирования
             int intermid_ans = num2;
             while (dotask == '+'){
                 int ans = idz(intermid_ans);
@@ -134,6 +142,7 @@ int main() {
     }
     cout << "Third task(input float data): ";
     cin >> num3;
+    // проверка на правильность ввода
     while(num3 != 0 || cin.fail()){
         if (cin.fail())
         {
@@ -155,6 +164,7 @@ int main() {
             char dotask; 
             cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
             cin >> dotask;
+            // буферная переменная для многократного инвертирования
             float intermid_ans = num3;
             while (dotask == '+'){
                 float ans = idz(intermid_ans);
@@ -173,6 +183,7 @@ int main() {
     }
     cout << "Fourth task(input double data): ";
     cin >> num4;
+    // проверка на правильность ввода
     while(num4 != 0 || cin.fail()){
         if (cin.fail())
         {
@@ -194,6 +205,7 @@ int main() {
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
             cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
             cin >> dotask;
+            // буферная переменная для многократного инвертирования
             double intermid_ans = num4;
             while (dotask == '+')
             {
@@ -215,6 +227,7 @@ int main() {
     return 0;
 }
 
+// перегруженная функция
 int idz(int n)
 {
     unsigned int mask = 1;
