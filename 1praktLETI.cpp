@@ -12,11 +12,6 @@ using namespace std;
 HANDLE hConsoleOutput = ::GetStdHandle(STD_OUTPUT_HANDLE);
 CONSOLE_SCREEN_BUFFER_INFO csb;
 
-// перегрузка функции по инвертации всех битов заданого числа
-int idz(int);
-float idz(float);
-double idz(double);
-
 // функция представления целого числа в памяти
 void findint(int num) {
     unsigned int order = 32;
@@ -124,26 +119,6 @@ int main() {
             findint(num2);
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
             cout << endl;
-            char dotk;
-            cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
-            cin >> dotk;
-            char dotask = cin.peek();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            // буферная переменная для многократного инвертирования
-            int intermid_ans = num2;
-            while (dotask == '+') {
-                int ans = idz(intermid_ans);
-                intermid_ans = ans;
-                cout << "You inverted number is: " << ans << "\n";
-                cout << "You inverted number in binary is: ";
-                findint(ans);
-                cout << endl;
-                ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
-                cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
-                cin >> dotk;
-                dotask = cin.peek();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
             cout << "Try new numbers(To quit type 0): ";
         }
         cin >> num2;
@@ -169,27 +144,6 @@ int main() {
             findfloat(num3);
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
             cout << endl;
-            char dotk;
-            cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
-            cin >> dotk;
-            char dotask = cin.peek();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            // буферная переменная для многократного инвертирования
-            float intermid_ans = num3;
-            while (dotask == '+') {
-                float ans = idz(intermid_ans);
-                intermid_ans = ans;
-                cout << "You inverted number is: " << ans << "\n";
-                cout << "You inverted number in binary is: ";
-                findfloat(ans);
-                cout << endl;
-                ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
-                cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
-
-                cin >> dotk;
-                dotask = cin.peek();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
             cout << "Try new numbers(To quit type 0): ";
         }
         cin >> num3;
@@ -213,82 +167,12 @@ int main() {
             cout << "blue - mantisa bit" << endl;
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
             finddouble(num4);
-            char dotk;
             cout << endl;
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
-            cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
-            cin >> dotk;
-            char dotask = cin.peek();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            // буферная переменная для многократного инвертирования
-            double intermid_ans = num4;
-            while (dotask == '+')
-            {
-                double ans = idz(intermid_ans);
-                intermid_ans = ans;
-                cout << "You inverted number is: " << ans << "\n";
-                cout << "You inverted number in binary is: ";
-                finddouble(ans);
-                cout << endl;
-                ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
-                cout << "Do you want to invert you number(type + for yes or ANYTHING for no): ";
-
-                cin >> dotk;
-                dotask = cin.peek();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
             cout << "Try new numbers(To quit type 0): ";
         }
         cin >> num4;
     }
     system("PAUSE");
     return 0;
-}
-
-// перегруженная функция
-int idz(int n)
-{
-    unsigned int mask = 1;
-    for (int i = 0; i < sizeof(int) * 8; i++) {
-        n ^= mask;
-        mask <<= 1;
-    }
-    return n;
-
-}
-
-float idz(float n)
-{
-    union {
-        float n1;
-        int g2;
-    };
-    n1 = n;
-    unsigned int mask = 1;
-    for (int i = 0; i < sizeof(int) * 8; i++) {
-        g2 ^= mask;
-        mask <<= 1;
-    }
-    return n1;
-
-}
-
-double idz(double n)
-{
-    union {
-        double n1;
-        int g2[2];
-    };
-    n1 = n;
-    unsigned int mask[2] = { 1, 1 };
-    for (int i = 0; i < 2; i++)
-    {
-        for (int k = 0; k < sizeof(int) * 8; k++)
-        {
-            g2[i] ^= mask[i];
-            mask[i] <<= 1;
-        }
-    }
-    return n1;
-
 }
