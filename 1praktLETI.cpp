@@ -100,10 +100,10 @@ int main() {
     float num3;
     double num4;
     cout << "First task: " << sizeof(int) << " " << sizeof(short int) << " " << sizeof(long int) << " " << sizeof(float) << " " << sizeof(double) << " " << sizeof(long double) << " " << sizeof(char) << " " << sizeof(bool) << endl;
-    cout << "Second task(input int data, to quit type x): ";
+    cout << "Second task(input int data, to quit type 0): ";
     cin >> num2;
     // проверка на правильность ввода
-    while (num2 != 0 || cin.fail() || cin.peek() != 'x') {
+    while (num2 != 0 || cin.fail()) {
         if (cin.fail() || isalpha(cin.peek()))
         {
             cin.clear();
@@ -119,14 +119,14 @@ int main() {
             findint(num2);
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
             cout << endl;
-            cout << "Try new numbers(To quit type x): ";
+            cout << "Try new numbers(To quit type 0): ";
         }
         cin >> num2;
     }
-    cout << "Third task(input float data, to quit type x): ";
+    cout << "Third task(input float data, to quit type 0): ";
     cin >> num3;
     // проверка на правильность ввода
-    while (num3 != 0 || cin.fail() || cin.peek() != 'x'){
+    while (num3 != 0 || cin.fail()){
         if (cin.fail() || isalpha(cin.peek()))
         {
             cin.clear();
@@ -144,14 +144,14 @@ int main() {
             findfloat(num3);
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
             cout << endl;
-            cout << "Try new numbers(To quit type x): ";
+            cout << "Try new numbers(To quit type 0): ";
         }
         cin >> num3;
     }
-    cout << "Fourth task(input double data, to quit type x): ";
+    cout << "Fourth task(input double data, to quit type 0): ";
     cin >> num4;
     // проверка на правильность ввода
-    while (num4 != 0 || cin.fail() || cin.peek() != 'x') {
+    while (num4 != 0 || cin.fail()) {
         if (cin.fail() || isalpha(cin.peek()))
         {
             cin.clear();
@@ -169,7 +169,7 @@ int main() {
             finddouble(num4);
             cout << endl;
             ::SetConsoleTextAttribute(hConsoleOutput, csb.wAttributes);
-            cout << "Try new numbers(To quit type x): ";
+            cout << "Try new numbers(To quit type 0): ";
         }
         cin >> num4;
     }
